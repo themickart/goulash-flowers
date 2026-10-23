@@ -3,7 +3,6 @@
    - Пиксельные спрайты цветов на canvas (tulip / rose / bouquet)
    - Курьер для второго экрана
    - Гомография: CSS matrix3d() для перспективного размещения на фото столба
-   Источник: goulash-flowers-main/js/app.js (адаптировано как ES module)
    ========================================================================== */
 
 const $ = (sel, root = document) => root.querySelector(sel);
