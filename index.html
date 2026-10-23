@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Goulash.tech Flowers — автоматизация цветочной доставки</title>
+	<meta name="description" content="Система автоматизации для цветочных магазинов с доставкой.">
+	<meta name="theme-color" content="#040406">
+	<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="logo-mark" viewBox="0 0 48 48"><path d="M35.8708 0H11.6535C5.21774 0 0 5.24615 0 11.7169V36.0662C0 42.5369 5.21774 47.7831 11.6535 47.7831H35.8708C42.3065 47.7831 47.5243 42.5369 47.5243 36.0662V11.7154C47.5243 5.24462 42.3065 0 35.8708 0Z" fill="#00FFFF"/><path d="M15.8418 15.9297H7.92188V31.8558H15.8418V15.9297Z" fill="#040406"/><path d="M31.6827 15.9295V7.96484H15.8413V15.9295H31.6827Z" fill="#040406"/><path d="M15.8413 31.8555V39.8201H31.6827V31.8555H15.8413Z" fill="#040406"/><path d="M39.6031 23.8945H31.6831V31.8576H39.6031V23.8945Z" fill="#040406"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 4h3.5v16H7zM13.5 4H17v16h-3.5z" fill="currentColor"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 8v5m0 3.5v.01M10.3 3.9 2.6 17.5A2 2 0 0 0 4.3 20.5h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-flower" viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.4" fill="#FF4F93"/><path d="M12 3.5c1.6 0 2.6 1.4 2.4 3 1.4-.8 3.2-.3 3.6 1.2.5 1.5-.6 2.9-2.2 3 1.2 1 1.3 2.8.1 3.7-1.2 1-2.9.5-3.6-.9-.7 1.4-2.4 1.9-3.6.9-1.2-.9-1.1-2.7.1-3.7-1.6-.1-2.7-1.5-2.2-3 .4-1.5 2.2-2 3.6-1.2-.2-1.6.8-3 2.4-3Z" fill="none" stroke="#FF4F93" stroke-width="1.5"/><path d="M12 15v6m0-2.5c-1.5-1.8-3.5-2-5-1.5m5 1.5c1.5-1.8 3.5-2 5-1.5" fill="none" stroke="#B1EC52" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="16" r="3.5" fill="none" stroke="#00FFFF" stroke-width="1.6"/><circle cx="18" cy="16" r="3.5" fill="none" stroke="#00FFFF" stroke-width="1.6"/><path d="M6 16l5-8h3m0 0l2 8m-2-8h2" fill="none" stroke="#00FFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-door" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14.5" cy="12" r="1" fill="currentColor"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.34.17 17.6 0 10.27 0 9c0-8 8-9 9-9 1 0 4.01.6 6.22 2.11C16.6 3.36 19 5 21 5c2.5 0 3 3 3 3s-2 2-7 0Z" transform="translate(0 2.5)" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 22c2-4 6-6 10-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-door" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14.5" cy="12" r="1" fill="currentColor"/></symbol>
+<symbol id="i-receipt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 7h6M9 11h6M9 15h3"/></g></symbol>
+<symbol id="i-workshop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8.2 8.2 12 12M8.2 15.8 20.2 3.8"/><circle cx="12" cy="12" r=".5"/></g></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.5 5H16a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h7.5"/></g></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v11H3V6Zm11 4h4l3 4v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></g></symbol>
+<symbol id="i-warehouse" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-6 9 6v12H3V9Zm4 12V11h10v10M7 15h10M7 18h10"/></g></symbol>
+</defs>
+</svg>
+<header class="header" data-header>
+<div class="container header__inner">
+<a class="logo" href="#top" aria-label="Goulash.tech Flowers — на главную">
+<svg aria-hidden="true" class="logo__mark"><use href="#logo-mark"/></svg>
+<span class="logo__text">Goulash.tech</span>
+<span class="logo__badge" aria-label="для цветочных магазинов">
+<svg viewBox="0 0 6 10" aria-hidden="true" fill="none"><path d="M1 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span>flowers</span>
+</span>
+</a>
+<nav class="nav" id="nav" aria-label="Навигация">
+<a href="#how">Как работает</a>
+<a href="#demo">Кабинет</a>
+<a href="#occasions">Поводы</a>
+<a href="#peak">Пиковые дни</a>
+<a href="#faq">Вопросы</a>
+</nav>
+<a class="btn btn--light btn--sm header__cta" href="#connect">Подключить</a>
+<button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Меню" data-burger><span></span><span></span><span></span></button>
+</div>
+</header>
+<main id="top">
+<section class="hero" aria-labelledby="hero-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container hero__inner">
+
+<div class="hero__content">
+<p class="hero__eyebrow"><span>Система автоматизации</span><span>для цветочных магазинов с доставкой</span></p>
+<h1 class="hero__title" id="hero-title">
+<span>Букет к двери</span>
+<span>за&nbsp;<span class="hero__title-accent">45 минут</span></span>
+<span>в любой день года</span>
+</h1>
+<p class="hero__lead"><span>Заказы из всех каналов в одной очереди мастерской,</span><span>маршруты для курьеров и клиенты, которые возвращаются к каждому поводу</span></p>
+<div class="hero__actions">
+<a class="btn btn--light" href="#connect">Обсудить за 15 минут <svg aria-hidden="true"><use href="#i-chevron"/></svg></a>
+<a class="btn btn--ghost" href="#demo">Попробовать кабинет</a>
+</div>
+<!-- <div class="hero__stats">
+<div class="hero__stat"><span class="hero__stat-num pixel">900<sup>+</sup></span><span class="hero__stat-label">точек в сети</span></div>
+<div class="hero__stat"><span class="hero__stat-num pixel">−40%</span><span class="hero__stat-label">опозданий</span></div>
+<div class="hero__stat"><span class="hero__stat-num pixel">×2,3</span><span class="hero__stat-label">повторных заказов</span></div>
+</div> -->
+</div>
+
+<!-- LED-знак: столб с двумя экранами, анимация спрайтов -->
+<div class="hero__media" aria-hidden="true">
+				<div class="sign">
+					<img class="sign__img" src="assets/img/signpost.webp" alt="" width="1200" height="1490" decoding="async" fetchpriority="high">
+					<div class="sign__screen" data-quad="193,246 472,225 474,578 192,583"><canvas data-led="flowers" width="512" height="636"></canvas></div>
+					<div class="sign__screen" data-quad="737,887 1014,883 1017,1244 729,1264"><canvas data-led="courier" width="512" height="677"></canvas></div>
+				</div>
+			</div>
+
+</div>
+<div class="peakstrip"><span class="gridlines" aria-hidden="true"></span><div class="container"><ul class="peakstrip__list" data-peakstrip></ul></div></div>
+</section>
+<section class="section section--white" id="how" aria-labelledby="how-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="section-head">
+<h2 class="h2" id="how-title">От заказа до двери — за один час</h2>
+<p class="lead">Каждый этап Гуляш берёт на себя: очередь мастерской, маршрут курьера, уведомления клиенту.</p>
+</div>
+
+<!--
+  НАСТРОЙКА ВИДЕО: замените src на свой файл, poster на скриншот.
+  Главы задаются атрибутами data-* прямо здесь — без правки JS.
+  data-at="секунды" — когда появляется глава (или 0–1 если видео <= 3 мин)
+  data-icon — иконка из SVG-спрайта (#i-bag, #i-flower, #i-bike, #i-door, #i-check)
+  data-label — короткий текст кнопки главы
+  data-title — заголовок тоста
+  data-text  — подпись тоста
+  data-time  — время таймера (формат MM:SS)
+-->
+<div class="film" data-film>
+<video data-film-video muted playsinline loop preload="metadata"
+  poster="assets/video/poster.jpg">
+  <source src="assets/video/goulash-flowers.mp4" type="video/mp4">
+</video>
+<div class="film__fallback" data-film-fallback hidden></div>
+<span class="film__shade" aria-hidden="true"></span>
+
+<div class="film__clock" aria-live="off">
+<span class="film__clock-time pixel" data-film-time>00:00</span>
+<span class="film__clock-label">с момента<br>заказа</span>
+</div>
+
+<div class="film__toast" data-film-toast>
+<span class="film__toast-icon" data-film-icon><svg aria-hidden="true"><use href="#i-receipt"/></svg></span>
+<span>
+<span class="film__toast-title" data-film-title>Заказ принят</span><br>
+<span class="film__toast-text" data-film-text>Пионы, 15 шт · к 19:00 · сюрприз</span>
+</span>
+</div>
+
+<button class="film__play" type="button" data-film-play aria-label="Пауза">
+<svg aria-hidden="true"><use href="#i-pause"/></svg>
+</button>
+</div>
+
+<!-- Главы: только время + название, без иконок. Настройте data-at и data-time под своё видео. -->
+
+<div class="chapters" role="group" aria-label="Этапы доставки">
+  <button class="chapter" data-at="0" data-time="00 мин"
+    data-title="Заказ принят"
+    data-text="Букет выбран · заказ оформлен"
+    data-icon="#i-receipt" aria-pressed="true">
+    <span class="chapter__time">0 мин</span>
+    <span class="chapter__title">Заказ принят</span>
+  </button>
+
+  <button class="chapter" data-at="0.2155" data-time="04 мин"
+    data-title="Передан флористу"
+    data-text="Флорист собирает ваш букет"
+    data-icon="#i-workshop" aria-pressed="false">
+    <span class="chapter__time">04 мин</span>
+    <span class="chapter__title">Передан флористу</span>
+  </button>
+
+  <button class="chapter" data-at="0.3333" data-time="12 мин"
+    data-title="Маршрут назначен"
+    data-text="Курьер и маршрут уже определены"
+    data-icon="#i-route" aria-pressed="false">
+    <span class="chapter__time">12 мин</span>
+    <span class="chapter__title">Маршрут назначен</span>
+  </button>
+
+  <button class="chapter" data-at="0.4343" data-time="19 мин"
+    data-title="Выдан курьеру"
+    data-text="Букет бережно везут получателю"
+    data-icon="#i-truck" aria-pressed="false">
+    <span class="chapter__time">19 мин</span>
+    <span class="chapter__title">Выдан курьеру</span>
+  </button>
+
+  <button class="chapter" data-at="0.6061" data-time="45 мин"
+    data-title="Доставлен"
+    data-text="Букет вручён · заказ завершён"
+    data-icon="#i-check" aria-pressed="false">
+    <span class="chapter__time">45 мин</span>
+    <span class="chapter__title">Доставлен</span>
+  </button>
+</div>
+
+
+<div class="cta-row" style="margin-top:48px; display:flex; justify-content:center; width:100%; box-sizing:border-box;">
+<a class="btn btn--dark" href="#connect" data-cta-context="Хочу доставку как в ролике">Хочу такую же систему <svg aria-hidden="true"><use href="#i-chevron"/></svg></a>
+<a class="btn btn--outline-dark" href="#demo">Попробовать кабинет</a>
+</div>
+</div>
+</section>
+<section class="section section--dark" aria-labelledby="pains-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="section-head">
+<h2 class="h2" id="pains-title">Четыре дыры, через которые уходит прибыль</h2>
+<p class="lead">Гуляш вырос из собственной сети доставки. У цветов те же законы: короткий цикл сборки, курьеры своими ногами, обещанное время и гость, которого нужно вернуть.</p>
+</div>
+<div class="pains">
+
+<article class="pain pain--wide pain--accent">
+<span class="pain__value pixel">до ×10</span>
+<h3 class="pain__title">Заказов в пиковый день — и мастерская встаёт</h3>
+<p class="pain__text">14 февраля и 8 марта приносят значимую долю годовой выручки. Флористы не успевают, курьеры едут в случайном порядке, а букет, опоздавший к празднику, — это возврат и плохой отзыв.</p>
+<p class="pain__fix"><b>С Гуляшом:</b> слоты доставки закрываются по реальной мощности мастерской, курьеры уходят волнами по готовым маршрутам.</p>
+</article>
+
+<article class="pain pain--narrow">
+<span class="pain__value pixel">5+</span>
+<h3 class="pain__title">Каналов заказа — и одна тетрадь</h3>
+<p class="pain__text">WhatsApp, Telegram, сайт, маркетплейсы и звонки. Заказы переписывают вручную, путают адреса, продают закончившиеся позиции.</p>
+<p class="pain__fix"><b>С Гуляшом:</b> все каналы в одной очереди. Стоп-лист обновляется везде сразу.</p>
+</article>
+
+<article class="pain pain--narrow">
+<span class="pain__value pixel">1 из 6</span>
+<h3 class="pain__title">Клиентов возвращаются сами</h3>
+<p class="pain__text">Покупатель цветов помнит повод, но не помнит ваш магазин. Без напоминания он купит там, где раньше увидит рекламу.</p>
+<p class="pain__fix"><b>С Гуляшом:</b> система помнит поводы и сама отправляет персональное напоминание за 3 дня.</p>
+</article>
+
+<article class="pain pain--wide pain--dark-contrast">
+<span class="pain__value pixel" style="color:var(--g-cyan)">−28 мин</span>
+<h3 class="pain__title">Экономия флориста на каждом заказе</h3>
+<p class="pain__text">Без системы флорист тратит до 8 минут только на то, чтобы понять, какой заказ следующий. Гуляш выдаёт задание на экран мастерской: состав, фото, приоритет и точное время выезда.</p>
+<p class="pain__fix"><b>Эффект на смене:</b> 12–14 заказов в день — почти час сохранённого рабочего времени.</p>
+</article>
+
+</div>
+</div>
+</section>
+<section class="section section--white" id="demo" aria-labelledby="demo-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="section-head">
+<h2 class="h2" id="demo-title">Три экрана кабинета — попробуйте сами</h2>
+<p class="lead">Данные выдуманы, но кнопки, фильтры и переключатели работают по-настоящему.</p>
+</div>
+<div class="demo-tabs" role="tablist" aria-label="Экраны кабинета">
+<button class="demo-tab is-active" role="tab" aria-selected="true" aria-controls="tab-workshop" data-tab="workshop">
+<svg aria-hidden="true"><use href="#i-workshop"/></svg>Мастерская
+</button>
+<button class="demo-tab" role="tab" aria-selected="false" aria-controls="tab-couriers" data-tab="couriers">
+<svg aria-hidden="true"><use href="#i-route"/></svg>Маршруты
+</button>
+<button class="demo-tab" role="tab" aria-selected="false" aria-controls="tab-stock" data-tab="stock">
+<svg aria-hidden="true"><use href="#i-warehouse"/></svg>Склад
+</button>
+</div>
+
+<!-- === Экран 1: Мастерская === -->
+<div class="demo-panel is-active" id="tab-workshop" role="tabpanel" data-widget="workshop">
+<div class="demo-panel__head">
+<div class="demo-panel__kpis">
+<div class="demo-kpi"><span class="demo-kpi__val" data-ws-kpi="active">—</span><span class="demo-kpi__label">в работе</span></div>
+<div class="demo-kpi"><span class="demo-kpi__val" data-ws-kpi="avg">—</span><span class="demo-kpi__label">ср. сборка</span></div>
+<div class="demo-kpi"><span class="demo-kpi__val" data-ws-kpi="ontime">—</span><span class="demo-kpi__label">в срок</span></div>
+</div>
+<div class="demo-panel__actions">
+<div class="chips" role="group" aria-label="Канал заказа" data-ws-filters></div>
+<button class="btn btn--cyan btn--sm" type="button" data-ws-add>+ Новый заказ</button>
+</div>
+</div>
+<div class="board" data-ws-board></div>
+<p class="demo-panel__hint" data-ws-message role="status">Нажмите на заказ, чтобы передать его в сборку, а затем отметить готовым.</p>
+</div>
+
+<!-- === Экран 2: Маршруты — карта Екатеринбурга из OSM === -->
+<div class="demo-panel" id="tab-couriers" role="tabpanel" data-widget="couriers" hidden>
+<div class="demo-panel__head">
+<div class="demo-panel__kpis">
+<div class="demo-kpi"><span class="demo-kpi__val" data-ekb-kpi="orders">—</span><span class="demo-kpi__label">заказов за смену</span></div>
+<div class="demo-kpi"><span class="demo-kpi__val" data-ekb-kpi="couriers">—</span><span class="demo-kpi__label">курьеров</span></div>
+<div class="demo-kpi"><span class="demo-kpi__val" data-ekb-kpi="avg">—</span><span class="demo-kpi__label">доставка</span></div>
+</div>
+<div class="demo-panel__actions">
+<div class="switch" role="group" aria-label="Режим" data-ekb-mode>
+<button type="button" aria-pressed="true" data-value="auto">Гуляш</button>
+<button type="button" aria-pressed="false" data-value="manual">Вручную</button>
+</div>
+</div>
+</div>
+<div class="ekb-map-wrap" data-ekb-map>
+<canvas data-ekb-canvas></canvas>
+<div class="ekb-map-info">
+<div class="ekb-map-badge">📍 <b>Екатеринбург</b> · ул. Малышева, 36</div>
+<div class="ekb-map-badge" data-ekb-status>Загрузка карты…</div>
+</div>
+<div class="ekb-map-credit">Данные карты © участники OpenStreetMap</div>
+</div>
+</div>
+
+<!-- === Экран 3: Склад === -->
+<div class="demo-panel" id="tab-stock" role="tabpanel" data-widget="stock" hidden>
+<div class="demo-panel__head">
+<div class="demo-panel__kpis">
+<div class="stock__legend">
+<span><span class="fresh__dot" style="background:#b1ec52"></span>Свежие</span>
+<span><span class="fresh__dot" style="background:#ffd23f"></span>Продать завтра</span>
+<span><span class="fresh__dot" style="background:#ff4f93"></span>Продать сегодня</span>
+<span><span class="fresh__dot" style="background:#4a4a4a"></span>Списать</span>
+</div>
+</div>
+<div class="demo-panel__actions">
+<div class="stock-days">
+<label class="range-label" for="stock-day"><span>Прогноз остатков</span><output for="stock-day" data-stock-day-label>Сегодня</output></label>
+<input id="stock-day" type="range" min="0" max="5" step="1" value="0" data-stock-day aria-label="День прогноза" aria-valuetext="Сегодня">
+<div class="stock-days__ticks" role="group" aria-label="Выбрать день прогноза">
+<button type="button" data-stock-select="0" aria-pressed="true">Сегодня</button><button type="button" data-stock-select="1" aria-pressed="false">+1</button><button type="button" data-stock-select="2" aria-pressed="false">+2</button><button type="button" data-stock-select="3" aria-pressed="false">+3</button><button type="button" data-stock-select="4" aria-pressed="false">+4</button><button type="button" data-stock-select="5" aria-pressed="false">+5 дней</button>
+</div>
+</div>
+</div>
+</div>
+<div class="stock__list" data-stock-list></div>
+<p class="stock__summary" data-stock-summary></p>
+</div>
+
+</div>
+<div class="cta-row" style="margin-top:48px; position:relative; left:50%; transform:translateX(-50%);">
+<a class="btn btn--dark" href="#connect" data-cta-context="Хочу кабинет для своего магазина">Хочу кабинет для своего магазина <svg aria-hidden="true"><use href="#i-chevron"/></svg></a>
+</div>
+</div>
+</section>
+<section class="section section--dark" id="occasions" aria-labelledby="occasions-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="section-head">
+<h2 class="h2" id="occasions-title">Клиенты возвращаются к каждому поводу</h2>
+<p class="lead">Гуляш помнит, кто, когда и зачем покупал букет. И напоминает сам — за 3 дня до каждого события.</p>
+</div>
+<div class="occasions-demo">
+<div class="occasions-col occasions-col--list">
+<div class="occasions-bar">
+<div class="switch" role="group" aria-label="Период" data-crm-range>
+<button type="button" aria-pressed="false" data-value="7">7 дней</button>
+<button type="button" aria-pressed="true" data-value="14">14 дней</button>
+<button type="button" aria-pressed="false" data-value="30">Месяц</button>
+</div>
+<span class="occasions-summary" data-crm-summary></span>
+</div>
+<div class="occasions-segments" data-crm-segments></div>
+<div class="occasions-list" data-crm-list data-lenis-prevent tabindex="0" aria-label="Клиенты и ближайшие поводы"></div>
+</div>
+<div class="occasions-delivery">
+<div class="push-phone" data-push-phone role="region" aria-label="Предпросмотр уведомления на телефоне">
+<div class="push-phone__island" aria-hidden="true"></div>
+<div class="push-phone__status"><span>9:41</span><span class="push-phone__indicators" aria-hidden="true">
+<svg width="14" height="11" viewBox="0 0 14 11" fill="currentColor"><rect x="0" y="7" width="2.5" height="4" rx=".7"/><rect x="4" y="5" width="2.5" height="6" rx=".7"/><rect x="8" y="2" width="2.5" height="9" rx=".7"/><rect x="12" y="0" width="2" height="11" rx=".7"/></svg>
+<svg width="14" height="11" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 3.5a11 11 0 0 1 14 0M4 6.5a6.5 6.5 0 0 1 8 0M7 9.5a2 2 0 0 1 2 0"/></svg>
+<svg width="22" height="11" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="20.8" height="10.8" rx="2.5" stroke="currentColor" stroke-opacity=".65" stroke-width="1.2"/><rect x="2.5" y="2.5" width="17" height="7" rx="1" fill="currentColor"/><path d="M23 4v4a2 2 0 0 0 0-4" fill="currentColor" fill-opacity=".65"/></svg>
+</span></div>
+<div class="push-phone__date">Понедельник, 26 октября</div>
+<div class="push-phone__time" aria-hidden="true">9:41</div>
+<div class="push-phone__notification" data-phone-notification aria-live="polite"></div>
+<div class="push-phone__home" aria-hidden="true"></div>
+</div>
+<div class="occasions-col occasions-col--push">
+<div class="occasions-push-head">
+<span class="muted small">Шаблон уведомления</span>
+<div class="switch switch--sm" role="group" aria-label="Тип" data-crm-template>
+<button type="button" aria-pressed="true" data-value="remind">Напомнить</button>
+<button type="button" aria-pressed="false" data-value="repeat">Повторить</button>
+<button type="button" aria-pressed="false" data-value="promo">Промо</button>
+</div>
+</div>
+<div class="push-preview" data-crm-push></div>
+<p class="push-delivery-status" data-phone-hint>Выберите клиента и отправьте push</p>
+<button class="btn btn--cyan" type="button" data-crm-send disabled>Отправить push</button>
+</div>
+</div>
+ </div>
+<div class="cta-row" style="margin-top:48px">
+<a class="btn btn--light" href="#connect" data-cta-context="Хочу напоминания о поводах">Настроить напоминания о поводах <svg aria-hidden="true"><use href="#i-chevron"/></svg></a>
+</div>
+</div>
+</section>
+<section class="section section--light" id="peak" aria-labelledby="peak-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="section-head">
+<h2 class="h2" id="peak-title">Пиковые дни без хаоса в мастерской</h2>
+<p class="lead">8&nbsp;марта, 14&nbsp;февраля, 1&nbsp;сентября — выберите праздник и посмотрите план подготовки.</p>
+</div>
+<div class="peak-layout">
+<div class="peak__card peak__card--dark">
+<div class="chips chips--compact" role="group" aria-label="Праздник" data-peak-chips></div>
+<div class="countdown">
+<div><span class="countdown__num pixel" data-cd="d">—</span><span class="countdown__label">дней</span></div>
+<div><span class="countdown__num pixel" data-cd="h">—</span><span class="countdown__label">часов</span></div>
+<div><span class="countdown__num pixel" data-cd="m">—</span><span class="countdown__label">минут</span></div>
+</div>
+<ul class="timeline" data-peak-timeline></ul>
+<a class="btn btn--cyan peak__cta" href="#connect" data-peak-cta data-cta-context="">Подготовиться</a>
+</div>
+<div class="peak__card peak__card--light">
+<h3 class="h3" style="margin-bottom:20px">Как Гуляш помогает в пик</h3>
+<ul class="feature-list">
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Предзаказы:</b> клиенты бронируют слоты за 3 недели, вы знаете нагрузку заранее</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Закрытие слотов:</b> система сама закрывает окна, когда мастерская перегружена</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Очередь по выезду:</b> флорист собирает в правильном порядке — букеты не вянут</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Волновая доставка:</b> курьеры уходят группами по районам, пробег минимальный</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>Фото вручения:</b> отправитель видит, что букет дошёл вовремя</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="section section--white" id="revenue" data-revenue aria-labelledby="revenue-title">
+<div class="container revenue">
+<div class="section-head">
+<h2 class="h2" id="revenue-title">Сколько выручки можно добавить?</h2>
+<p class="lead">Введите показатели одной точки. Посмотрим, сколько дополнительных заказов может дать выбранный сценарий роста.</p>
+</div>
+<div class="revenue__layout">
+<div class="revenue__inputs">
+<div class="revenue__control">
+<label class="revenue__field" for="revenue-orders"><span id="revenue-orders-label">Заказов в день на одну точку</span><span class="revenue__input-wrap"><input id="revenue-orders" name="orders" type="number" min="0" max="10000" step="1" value="30" inputmode="numeric" data-revenue-input="orders"><span>заказов</span></span></label>
+<input class="revenue__range" type="range" min="0" max="100" step="1" value="30" data-revenue-range="orders" aria-labelledby="revenue-orders-label" aria-describedby="revenue-range-hint">
+<div class="revenue__range-labels" aria-hidden="true"><span>0</span><span>50</span><span>100+</span></div>
+</div>
+<div class="revenue__control">
+<label class="revenue__field" for="revenue-check"><span id="revenue-check-label">Средний чек</span><span class="revenue__input-wrap"><input id="revenue-check" name="check" type="number" min="0" max="1000000" step="1" value="3500" inputmode="numeric" data-revenue-input="check"><span>₽</span></span></label>
+<input class="revenue__range" type="range" min="0" max="10000" step="1" value="3500" data-revenue-range="check" aria-labelledby="revenue-check-label" aria-describedby="revenue-range-hint">
+<div class="revenue__range-labels" aria-hidden="true"><span>0 ₽</span><span>5 000 ₽</span><span>10 000+ ₽</span></div>
+</div>
+<div class="revenue__control">
+<label class="revenue__field" for="revenue-locations"><span id="revenue-locations-label">Количество точек</span><span class="revenue__input-wrap"><input id="revenue-locations" name="locations" type="number" min="1" max="1000" step="1" value="1" inputmode="numeric" data-revenue-input="locations"><span>точек</span></span></label>
+<input class="revenue__range" type="range" min="1" max="10" step="1" value="1" data-revenue-range="locations" aria-labelledby="revenue-locations-label" aria-describedby="revenue-range-hint">
+<div class="revenue__range-labels" aria-hidden="true"><span>1</span><span>5</span><span>10+</span></div>
+</div>
+<p class="revenue__range-hint" id="revenue-range-hint">Больше верхней отметки? Впишите точное значение в поле.</p>
+<fieldset class="revenue__scenarios"><legend>Предполагаемый рост заказов</legend><div class="switch" role="group" aria-label="Сценарий роста" data-revenue-growth><button type="button" data-growth="5" aria-pressed="false">+5%</button><button type="button" data-growth="10" aria-pressed="true">+10%</button><button type="button" data-growth="15" aria-pressed="false">+15%</button></div></fieldset>
+<p class="revenue__error" data-revenue-error role="status" hidden>Заполните все поля целыми числами в указанных пределах.</p>
+</div>
+<div class="revenue__result">
+<span class="revenue__eyebrow">Дополнительная выручка за 30 дней</span>
+<output class="revenue__amount" for="revenue-orders revenue-check revenue-locations" data-revenue-extra aria-live="polite" aria-atomic="true">+315 000 ₽</output>
+<div class="revenue__metrics"><p><b data-revenue-added>90</b><span>доп. заказов за 30 дней</span></p><p><b data-revenue-base>3 150 000 ₽</b><span>текущая выручка за 30 дней</span></p></div>
+<p class="revenue__formula" data-revenue-formula>30 заказов × 3 500 ₽ × 1 точка × 30 дней × 10%</p>
+<a class="btn btn--cyan" href="#connect" data-revenue-cta data-cta-context="Хочу обсудить потенциал выручки моего магазина">Обсудить рост моего магазина <svg aria-hidden="true"><use href="#i-chevron"/></svg></a>
+</div>
+</div>
+<p class="revenue__note">Расчёт по выбранному сценарию, а не гарантия результата. Рост 5–15% — допущение для оценки: дополнительные заказы могут появляться за счёт повторных покупок, напоминаний и свободных слотов доставки. В расчёте 30 дней; расходы и стоимость сервиса не вычитаются.</p>
+</div>
+</section>
+<section class="section section--dark" id="connect" aria-labelledby="connect-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="connect-layout">
+<div class="connect-info">
+<h2 class="h2" id="connect-title">Разберём ваш магазин за 15 минут</h2>
+<p class="lead" style="color:var(--g-od-secondary);margin-top:16px">Покажем на ваших цифрах, что изменится в пиковый день. Без обязательств.</p>
+<ul class="connect-points">
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Оценим нагрузку в пиковые дни</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Покажем кабинет на реальных данных</span></li>
+<li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Расскажем о подключении и ценах</span></li>
+</ul>
+<div class="connect-contacts">
+<a href="tel:+74958683608" class="btn btn--ghost">+7 495 868-36-08</a>
+<a href="mailto:info@goulash.tech" class="btn btn--ghost">info@goulash.tech</a>
+</div>
+</div>
+<div class="form-wrap" data-form-wrap>
+<div class="form-context" hidden data-form-context>
+<span data-form-context-text></span>
+<button class="form-context__close" type="button" aria-label="Убрать" data-form-context-close><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+</div>
+<form class="form" id="connect-form" novalidate autocomplete="off" data-connect-form>
+<div data-form-state="form">
+<div class="field" data-f="name">
+<label class="field__label" for="f-name">Имя</label>
+<input class="field__input" id="f-name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" aria-describedby="e-name">
+<span class="field__error" id="e-name" role="alert"></span>
+</div>
+<div class="field" data-f="phone">
+<label class="field__label" for="f-phone">Телефон</label>
+<input class="field__input" id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel" aria-describedby="e-phone">
+<span class="field__error" id="e-phone" role="alert"></span>
+</div>
+<div class="field" data-f="shop">
+<label class="field__label" for="f-shop">Название магазина</label>
+<input class="field__input" id="f-shop" name="shop" type="text" placeholder="«Пион и Ко»" autocomplete="organization" aria-describedby="e-shop">
+<span class="field__error" id="e-shop" role="alert"></span>
+</div>
+<div class="form__row">
+<div class="field" data-f="city">
+<label class="field__label" for="f-city">Город</label>
+<input class="field__input" id="f-city" name="city" type="text" placeholder="Екатеринбург" autocomplete="address-level2" aria-describedby="e-city">
+<span class="field__error" id="e-city" role="alert"></span>
+</div>
+<div class="field" data-f="points">
+<label class="field__label" for="f-points">Точек</label>
+<input class="field__input" id="f-points" name="points" type="text" placeholder="1" inputmode="numeric" aria-describedby="e-points">
+<span class="field__error" id="e-points" role="alert"></span>
+</div>
+</div>
+<div class="field" data-f="agree">
+<label class="checkbox"><input type="checkbox" name="agree" aria-describedby="e-agree"><span class="checkbox__box"></span><span>Соглашаюсь с условиями обработки персональных данных</span></label>
+<span class="field__error" id="e-agree" role="alert"></span>
+</div>
+<button class="btn btn--cyan form__submit" type="submit" data-form-submit>Отправить заявку</button>
+</div>
+<div data-form-state="success" hidden>
+<div class="form-result form-result--success">
+<div class="form-result__icon"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
+<h3 class="form-result__title">Заявка отправлена</h3>
+<p class="form-result__text">Мы свяжемся с вами в течение рабочего дня. Пока можете попробовать кабинет.</p>
+<a class="btn btn--light" href="#demo">Попробовать кабинет</a>
+</div>
+</div>
+<div data-form-state="error" hidden>
+<div class="form-result form-result--error">
+<div class="form-result__icon"><svg aria-hidden="true"><use href="#i-alert"/></svg></div>
+<h3 class="form-result__title">Что-то пошло не так</h3>
+<p class="form-result__text" data-err-text>Сервер не ответил. Данные сохранены — нажмите «Попробовать снова» или позвоните нам.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button class="btn btn--light" type="button" data-retry>Попробовать снова</button>
+<button class="btn btn--ghost" type="button" data-back>Изменить данные</button>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<section class="section section--dark" id="faq" aria-labelledby="faq-title">
+<span class="gridlines" aria-hidden="true"></span>
+<div class="container">
+<div class="faq-layout">
+<div class="faq__ask">
+<h2 class="h2" id="faq-title">Вопросы и ответы</h2>
+<p class="lead" style="margin-top:16px;color:var(--g-od-secondary)">Остались вопросы? Напишите или позвоните — разберёмся за 15 минут.</p>
+<div class="cta-row" style="margin-top:24px;flex-direction:column;align-items:flex-start;gap:12px">
+<a class="btn btn--light" href="#connect">Задать вопрос</a>
+<a class="btn btn--ghost" href="tel:+74958683608">+7 495 868-36-08</a>
+</div>
+</div>
+<div class="faq__list" data-faq>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">Гуляш же для ресторанов. Чем он поможет цветочному магазину? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Доставка букета устроена так же, как доставка пиццы: заказ, сборка за 15–30 минут, курьер, обещанное время и повторная покупка. Кухню заменяет мастерская флориста, а меню — каталог букетов. Маршрутизацию, приложение и лояльность берём проверенные на 900+ точках.</p></div></div>
+</div>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">Можно ли принимать заказы из мессенджеров и маркетплейсов? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Да. Заказы из сайта, приложения, мессенджеров, маркетплейсов и от оператора попадают в одну очередь мастерской. Стоп-лист синхронизируется везде — закончившиеся пионы больше никто не продаст.</p></div></div>
+</div>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">Как работают доставка к точному времени и сюрпризы? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Клиент выбирает окно доставки, Гуляш ставит букет в сборку так, чтобы он был свежим к выезду. Для сюрпризов курьер получает отметку «не звонить получателю», отправитель видит статус и фото вручения.</p></div></div>
+</div>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">Сколько длится подключение? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Минимальная настройка — от 7 дней, полный переход — в среднем 21 день. Если до 8 марта осталось меньше месяца, сначала включаем мастерскую и маршруты, а приложение добавляем после праздника.</p></div></div>
+</div>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">У меня одна точка и три курьера. Это не слишком сложно? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Гуляш работает и с одной точкой, и с федеральной сетью. Для небольшого магазина главный эффект — повторные заказы по напоминаниям и порядок в пиковые дни. Модули подключаются постепенно.</p></div></div>
+</div>
+<div class="faq__item">
+<button class="faq__q" type="button" aria-expanded="false">У Гуляша есть мобильное приложение для курьеров? <span class="faq__icon" aria-hidden="true"></span></button>
+<div class="faq__a"><div><p>Да. Курьеры получают заказы, маршрут и навигацию в мобильном приложении. Диспетчер видит всех на карте в реальном времени и может скорректировать маршрут на ходу.</p></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__top">
+<a class="logo" href="#top" aria-label="Goulash.tech Flowers — на главную">
+<svg aria-hidden="true" class="logo__mark"><use href="#logo-mark"/></svg>
+<span class="logo__text">Goulash.tech</span>
+<span class="logo__badge"><svg viewBox="0 0 6 10" aria-hidden="true" fill="none"><path d="M1 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>flowers</span></span>
+</a>
+<a class="btn btn--light footer__cta" href="#connect">Подключить</a>
+<div class="footer__contacts">
+<a href="tel:+74958683608">+7 495 868-36-08</a>
+<a href="mailto:info@goulash.tech">info@goulash.tech</a>
+<span>Екатеринбург, Куйбышева, 41</span>
+</div>
+</div>
+<p class="footer__note">* Концепт-лендинг, сделанный как тестовое задание. Не является официальным сайтом Goulash.tech и публичной офертой. Показатели — оценки на основе данных ресторанной доставки Goulash.tech, интерфейс кабинета и данные выдуманы.</p>
+</div>
+
+<div class="footer__wordmark" aria-hidden="true">
+<span>Goulash.tech</span>
+</div>
+</footer>
+
+<a class="sticky-cta btn btn--cyan" href="#connect" data-sticky-cta>Оставить заявку</a>
+<div class="toaster" role="status" aria-live="polite" data-toaster></div>
+
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>

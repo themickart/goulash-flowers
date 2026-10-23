@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="600" height="750">
+  <defs>
+    <!-- металлический столб -->
+    <linearGradient id="pole" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="35%" stop-color="#2e2e2e"/>
+      <stop offset="50%" stop-color="#3a3a3a"/>
+      <stop offset="65%" stop-color="#2e2e2e"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <!-- экраны -->
+    <linearGradient id="screen-bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0e0e10"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
+    </linearGradient>
+    <!-- рамка экрана -->
+    <linearGradient id="frame" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2e"/>
+      <stop offset="100%" stop-color="#1a1a1e"/>
+    </linearGradient>
+    <!-- тень экрана -->
+    <filter id="screen-shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00ffff" flood-opacity="0.15"/>
+    </filter>
+    <!-- свечение столба -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Фон — прозрачный -->
+
+  <!-- Декоративная подставка внизу -->
+  <ellipse cx="300" cy="730" rx="48" ry="8" fill="#111" opacity="0.6"/>
+  <rect x="280" y="700" width="40" height="35" rx="4" fill="url(#pole)"/>
+  <rect x="270" y="688" width="60" height="16" rx="6" fill="#222"/>
+
+  <!-- Основной столб -->
+  <rect x="284" y="0" width="32" height="710" fill="url(#pole)"/>
+  <!-- Блики на столбе -->
+  <rect x="290" y="0" width="4" height="710" fill="white" opacity="0.06"/>
+  <rect x="305" y="0" width="2" height="710" fill="white" opacity="0.04"/>
+
+  <!-- Крепление верхнего экрана -->
+  <rect x="260" y="55" width="80" height="12" rx="4" fill="#1e1e22"/>
+  <rect x="258" y="250" width="84" height="12" rx="4" fill="#1e1e22"/>
+
+  <!-- ВЕРХНИЙ ЭКРАН (цветы) — data-quad ориентир -->
+  <!-- Позиция: x=145 y=68, ширина=310, высота=180 -->
+  <g filter="url(#screen-shadow)">
+    <!-- рамка -->
+    <rect x="140" y="63" width="320" height="190" rx="18" fill="url(#frame)" stroke="#2d2d32" stroke-width="1.5"/>
+    <!-- экран -->
+    <rect x="148" y="71" width="304" height="174" rx="14" fill="url(#screen-bg)"/>
+    <!-- верхняя полоска статуса -->
+    <rect x="148" y="71" width="304" height="24" rx="14" fill="#111114"/>
+    <rect x="148" y="83" width="304" height="12" fill="#111114"/>
+    <circle cx="165" cy="83" r="5" fill="#2a2a2f"/>
+    <text x="176" y="87" font-family="monospace" font-size="9" fill="#555">GOULASH · FLOWERS</text>
+    <!-- светящийся индикатор -->
+    <circle cx="430" cy="83" r="4" fill="#00ffff" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- НИЖНИЙ ЭКРАН (курьер) -->
+  <!-- Позиция: x=145 y=268, ширина=310, высота=175 -->
+  <g filter="url(#screen-shadow)">
+    <rect x="140" y="263" width="320" height="185" rx="18" fill="url(#frame)" stroke="#2d2d32" stroke-width="1.5"/>
+    <rect x="148" y="271" width="304" height="169" rx="14" fill="url(#screen-bg)"/>
+    <!-- верхняя полоска -->
+    <rect x="148" y="271" width="304" height="24" rx="14" fill="#111114"/>
+    <rect x="148" y="283" width="304" height="12" fill="#111114"/>
+    <circle cx="165" cy="283" r="5" fill="#2a2a2f"/>
+    <text x="176" y="287" font-family="monospace" font-size="9" fill="#555">МАРШРУТ · КУРЬЕР</text>
+    <circle cx="430" cy="283" r="4" fill="#b1ec52" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Декоративные цветочные элементы на столбе -->
+  <!-- Левая веточка -->
+  <g opacity="0.7" transform="translate(145, 460)">
+    <path d="M30 0 Q15 -20 0 -15 Q10 -5 20 10" fill="none" stroke="#b1ec52" stroke-width="1.5"/>
+    <path d="M30 0 Q20 -25 5 -22 Q15 -10 25 5" fill="none" stroke="#b1ec52" stroke-width="1.5"/>
+    <circle cx="0" cy="-15" r="5" fill="#ff4f93" opacity="0.8"/>
+    <circle cx="5" cy="-22" r="4" fill="#ff4f93" opacity="0.7"/>
+    <circle cx="18" cy="-8" r="3" fill="#ffd23f" opacity="0.8"/>
+  </g>
+  <!-- Правая веточка -->
+  <g opacity="0.7" transform="translate(455, 460) scale(-1,1)">
+    <path d="M30 0 Q15 -20 0 -15 Q10 -5 20 10" fill="none" stroke="#b1ec52" stroke-width="1.5"/>
+    <path d="M30 0 Q20 -25 5 -22 Q15 -10 25 5" fill="none" stroke="#b1ec52" stroke-width="1.5"/>
+    <circle cx="0" cy="-15" r="5" fill="#ff4f93" opacity="0.8"/>
+    <circle cx="5" cy="-22" r="4" fill="#ff4f93" opacity="0.7"/>
+    <circle cx="18" cy="-8" r="3" fill="#ffd23f" opacity="0.8"/>
+  </g>
+
+  <!-- Маленький бейдж внизу столба -->
+  <rect x="256" y="640" width="88" height="22" rx="5" fill="#1a1a1e" stroke="#2a2a2e" stroke-width="1"/>
+  <text x="300" y="655" font-family="monospace" font-size="8" fill="#444" text-anchor="middle">GOULASH.TECH</text>
+</svg>
